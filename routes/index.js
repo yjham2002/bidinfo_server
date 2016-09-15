@@ -4,11 +4,10 @@ var mysql = require('mysql');
 var pool = mysql.createPool({
     connectionLimit: 3,
     host: 'localhost',
-    user: 'guestmember',
-    database: 'test',
-    password: '1234'
+    user: 'yjham2016',
+    database: 'yjham2016',
+    password: 'gpswpf12'
 });
-
 
 /* GET home page. */
 router.get('/', function (req, res, next) {

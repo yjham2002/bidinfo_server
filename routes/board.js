@@ -1,29 +1,26 @@
 var express = require('express');
 var router = express.Router();
 
-//   MySQL 로드
 var mysql = require('mysql');
 var pool = mysql.createPool({
     connectionLimit: 3,
     host: 'localhost',
-    user: 'guestmember',
-    database: 'test',
-    password: '1234'
+    user: 'yjham2016',
+    database: 'yjham2016',
+    password: 'gpswpf12'
 });
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-    // 그냥 board/ 로 접속할 경우 전체 목록 표시로 리다이렉팅
     res.redirect('/board/list/1');
 });
 
-// 리스트 전체 보기 GET
 router.get('/list/:page', function(req,res,next){
 
     pool.getConnection(function (err, connection)
     {
         // Use the connection
-        var sqlForSelectList = "SELECT idx, creator_id, title, date_format(modidate,'%Y-%m-%d %H:%i:%s') modidate,hit FROM board";
+        var sqlForSelectList = "SELECT * FROM univtable_list";
         connection.query(sqlForSelectList, function (err, rows) {
             if (err) console.error("err : " + err);
             console.log("rows : " + JSON.stringify(rows));

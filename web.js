@@ -18,9 +18,24 @@ connection.connect(function(err) {
         throw err;
     }
 });
+/*
+app.post('/users',function(req,res){
+    var user = {'userid':req.body.userid,
+                'name':req.body.name,
+                'address':req.body.address};
+    var query = connection.query('insert into users set ?',user,function(err,result){
+        if (err) {
+            console.error(err);
+            throw err;
+        }
+        console.log(query);
+        res.send(200,'success');
+    });
+});
+*/
 
 app.get('/users', function(req,res){
-    var query = connection.query('select * from univtable_member',function(err,rows){
+    var query = connection.query('select * from univtable_member where sid = ' + mysql.escape(req.params.sid),function(err,rows){
         console.log(rows);
         res.json(rows);
     });

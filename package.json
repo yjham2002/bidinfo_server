@@ -11,5 +11,9 @@
     "express": "^4.14.0"
   },
   "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "yjham2016@univtable.cafe24app.com:yjham2016_univtable"
+  },
   "description": ""
 }

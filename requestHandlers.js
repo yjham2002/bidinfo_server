@@ -37,29 +37,30 @@ app.post('/users',function(req,res){
 
 // app.get('/sample/:id', routes.sample)
 
-function remove(){
+function remove(res){
 
 }
 
-function update(){
+function update(res){
 
 }
 
 //  + mysql.escape(req.param('sid'))
 
-function read() {
+function read(res) {
     console.log('request handler called - read');
     var query = connection.query('select * from univtable_member', function(err,rows){
+        res.json(rows);
         console.log(rows);
     });
     console.log(query);
 }
  
-function create() {
+function create(res) {
     console.log('request handler called - create');
 }
 
-function noResponse(){
+function noResponse(res){
 
 } 
 

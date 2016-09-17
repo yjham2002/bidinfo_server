@@ -1,16 +1,15 @@
 {
-  "name": "univtable",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {},
-  "dependencies": {},
+  "name": "temp",
+  "version": "1.0.0",
   "main": "web.js",
-  "repository": {
-    "type": "git",
-    "url": "yjham2016@univtable.cafe24app.com:yjham2016_univtable"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
   "devDependencies": {},
   "description": ""
 }

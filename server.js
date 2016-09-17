@@ -1,5 +1,4 @@
-var express = require('express');
-var app = express();
+var http = require('http');
 var url = require('url');
  
 function start(route, handle) {
@@ -11,9 +10,8 @@ function start(route, handle) {
         response.write('Hello World');
         response.end();
     }
-    app.createServer(onRequest).listen(8001);
+    http.createServer(onRequest).listen(8001);
     console.log('server has started.');
 }
- 
-exports.start = start;
 
+exports.start = start;

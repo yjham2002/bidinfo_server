@@ -17,13 +17,12 @@ connection.connect(function(err) {
     }
 });
 
-router.get('/', function(req, res, next) {
-    var query = connection.query('select * from univtable_member', function(err,rows){
+router.get('/', function(req, res) {
+    var query = connection.query('select * from univtable_member', [], function(err,rows){
         res.json(rows);
         console.log(rows);
     });
     console.log(query);
-    res.send('respond with a resource');
 });
 
 module.exports = router;

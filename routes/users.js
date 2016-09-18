@@ -17,9 +17,10 @@ connection.connect(function(err) {
     }
 });
 
-router.get('/', function(req, res) {
+router.get('/:id', function(req, res) {
     var query = connection.query('select * from univtable_member', [], function(err,rows){
         res.json(rows);
+        res.write(req.params.id);
         console.log(rows);
     });
     console.log(query);

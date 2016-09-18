@@ -19,7 +19,7 @@ connection.connect(function(err) {
 
 router.get('/', function(req, res, next) {
     var query = connection.query('select * from univtable_member', function(err,rows){
-        res.write(rows.toJSON());
+        res.json(rows);
         console.log(rows);
     });
     console.log(query);

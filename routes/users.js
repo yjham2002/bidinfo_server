@@ -18,13 +18,12 @@ connection.connect(function(err) {
 });
 
 router.get('/', function(req, res, next) {
-    console.log('request handler called - read');
     var query = connection.query('select * from univtable_member', function(err,rows){
         res.write(rows.toJSON());
         console.log(rows);
     });
     console.log(query);
-  res.send('respond with a resource');
+    res.send('respond with a resource');
 });
 
 module.exports = router;

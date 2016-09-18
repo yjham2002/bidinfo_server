@@ -17,10 +17,14 @@ connection.connect(function(err) {
     }
 });
 
+router.post('/new', function (req, res){
+    res.write(req.body.id + '(new user)');
+    res.end();
+});
+
 router.get('/:id', function(req, res) {
     res.write(req.params.id);
     res.end();
-    console.log(req.params.id);
 });
 
 router.get('/', function(req, res) {

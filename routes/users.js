@@ -19,7 +19,7 @@ connection.connect(function(err) {
 
 router.get('/:id', function(req, res) {
     res.write(req.params.id);
-    console.log(query);
+    console.log(req.params.id);
 });
 
 router.get('/', function(req, res) {

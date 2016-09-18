@@ -50,7 +50,7 @@ function update(res){
 function read(res) {
     console.log('request handler called - read');
     var query = connection.query('select * from univtable_member', function(err,rows){
-        //res.send(rows);
+        res.write(rows);
         console.log(rows);
     });
     console.log(query);

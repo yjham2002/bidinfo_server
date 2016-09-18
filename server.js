@@ -7,8 +7,8 @@ function start(route, handle) {
         console.log('request for ' + pathname + ' received.');
         route(handle, pathname, response);
         response.writeHead(200, {'Content-Type' : 'text/plain'});
-        response.write('Hello World');
-        response.end();
+        response.write('UnivTable');
+        
     }
     http.createServer(onRequest).listen(8001);
     console.log('server has started.');

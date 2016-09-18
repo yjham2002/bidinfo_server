@@ -4,6 +4,8 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+app.set('view engine', 'html');
+
 app.use('/', routes);
 app.use('/users', users);
 

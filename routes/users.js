@@ -1,5 +1,6 @@
 var express = require('express');
 var mysql = require('mysql');
+var bodyParser = require('body-parser');
 
 var connection = mysql.createConnection({
   host    :'10.0.0.1',
@@ -23,7 +24,9 @@ router.get('/:id', function(req, res) {
     res.end();
 });
 
-router.post('/new', function(req, res) {
+router.post('/new', bodyParser.urlencoded({
+    extended: true
+}), function(req, res) {
     var data = {
         'Uid':req.body.Uid,
         'Pwd':req.body.Pwd,

@@ -4,6 +4,7 @@ var users = require('./routes/users');
 
 var app = express();
 
+app.use(express.bodyParser());
 app.use('/', routes);
 app.use('/users', users);
 

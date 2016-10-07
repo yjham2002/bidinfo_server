@@ -2,8 +2,7 @@
   "name": "univtable",
   "version": "0.0.1",
   "private": true,
-  "scripts": {
-  },
+  "scripts": {},
   "dependencies": {
     "debug": "~2.2.0",
     "express": "~4.13.4"

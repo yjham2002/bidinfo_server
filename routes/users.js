@@ -22,7 +22,7 @@ router.get('/:id', function(req, res) {
     res.end();
 });
 
-router.post('/new', express.bodyParser(), function(req, res) {
+router.post('/new', function(req, res) {
     var data = {
         'Uid':req.body.Uid,
         'Pwd':req.body.Pwd,

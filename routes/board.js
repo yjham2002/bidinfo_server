@@ -36,11 +36,7 @@ router.post('/like', bodyParser.urlencoded({
 router.post('/unlike', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {
-    var data = {
-        'bid':req.body.bid,
-        'mid':req.body.mid
-    };
-    var query = connection.query('delete from Bidinfo_like bid=' + data.bid + ' and mid=' + data.mid, [], function(err,rows){
+    var query = connection.query('delete from Bidinfo_like where bid=' + req.body.bid + ' and mid=' + req.body.mid, [], function(err,rows){
         res.json(rows);
         console.log(rows);
     });

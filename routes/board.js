@@ -28,7 +28,8 @@ router.get('/:id', function(req, res) {
 });
 
 router.get('/comment/:id', function(req, res) {
-    var query = connection.query('select * from Bidinfo_comment where `bid`=' + req.params.id, [], function(err,rows){
+    var query = connection.query('SELECT `Bidinfo_comment`.*, (SELECT Name FROM `Bidinfo_user` WHERE `Bidinfo_comment`.mid = `Bidinfo_user`.id) '
+    +'AS userName FROM `Bidinfo_comment` WHERE `bid`=' + req.params.id +' ORDER BY date DESC', [], function(err,rows){
         res.json(rows);
         console.log(rows);
     });
@@ -60,7 +61,7 @@ router.get('/', function(req, res) {
     +'WHERE `Bidinfo_bidlist`.id = `Bidinfo_like`.bid) AS likecount, '
     +'(SELECT COUNT( * ) FROM `Bidinfo_comment` '
     +'WHERE `Bidinfo_bidlist`.id = `Bidinfo_comment`.bid) AS commentcount'
-    +' FROM `Bidinfo_bidlist` ORDER BY date ASC ', [], function(err,rows){
+    +' FROM `Bidinfo_bidlist` ORDER BY date DESC ', [], function(err,rows){
         res.json(rows);
         console.log(rows);
     });

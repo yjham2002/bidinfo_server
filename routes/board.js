@@ -27,6 +27,14 @@ router.get('/:id', function(req, res) {
     console.log(query);
 });
 
+router.get('/comment/:id', function(req, res) {
+    var query = connection.query('select * from Bidinfo_comment where `bid`=' + req.params.id, [], function(err,rows){
+        res.json(rows);
+        console.log(rows);
+    });
+    console.log(query);
+});
+
 router.post('/new', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {

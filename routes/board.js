@@ -19,6 +19,16 @@ connection.connect(function(err) {
     }
 });
 
+router.post('/check', bodyParser.urlencoded({
+    extended: true
+}), function(req, res) {
+    var query = connection.query('select count(*) as `check` from `Bidinfo_like` where `bid`=' + req.body.bid + ' and mid=' + req.body.mid, [], function(err,rows){
+        res.json(rows);
+        console.log(rows);
+    });
+    console.log(query);
+});
+
 router.post('/like', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {

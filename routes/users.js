@@ -38,7 +38,7 @@ router.get('/gcm', function(req, res) {
 router.post('/login', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {
-    var query = connection.query('select count(*) FROM `Bidinfo_user` where Uid = ' + req.body.Uid + ' AND Pwd = ' + req.body.Pwd, [], function(err,rows){
+    var query = connection.query('select count(*) FROM `Bidinfo_user` where `Uid`=\'' + req.body.Uid + '\' AND `Pwd`=\'' + req.body.Pwd + '\' ', [], function(err,rows){
         res.json(rows);
         console.log(rows);
     });

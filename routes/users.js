@@ -35,6 +35,16 @@ router.get('/gcm', function(req, res) {
     console.log(query);
 });
 
+router.post('/login', bodyParser.urlencoded({
+    extended: true
+}), function(req, res) {
+    var query = connection.query('select count(*) Bidinfo_user where Uid = ' + req.body.Uid + " AND Pwd = " + req.body.Pwd, [], function(err,rows){
+        res.json(rows);
+        console.log(rows);
+    });
+    console.log(query);
+});
+
 router.post('/gcm', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {

@@ -28,7 +28,7 @@ router.get('/recent', function(req, res) {
 });
 
 router.get('/:id', function(req, res) {
-    var query = connection.query('select * from `Bidinfo_notice where` `id`=' + req.params.id, [], function(err,rows){
+    var query = connection.query('select * from `Bidinfo_notice` where `id`=' + req.params.id, [], function(err,rows){
         res.json(rows);
         console.log(rows);
     });

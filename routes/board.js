@@ -23,8 +23,8 @@ router.post('/like', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {
     var data = {
-        'bid':req.query.bid,
-        'mid':req.query.mid
+        'bid':req.body.bid,
+        'mid':req.body.mid
     };
     var query = connection.query('insert into Bidinfo_like set ?', data, function(err,rows){
         res.json(rows);
@@ -37,8 +37,8 @@ router.post('/unlike', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {
     var data = {
-        'bid':req.query.bid,
-        'mid':req.query.mid
+        'bid':req.body.bid,
+        'mid':req.body.mid
     };
     var query = connection.query('delete from Bidinfo_like bid=' + data.bid + ' and mid=' + data.mid, [], function(err,rows){
         res.json(rows);

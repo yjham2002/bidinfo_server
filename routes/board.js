@@ -55,7 +55,10 @@ router.post('/new', bodyParser.urlencoded({
 });
 
 router.get('/', function(req, res) {
-    var query = connection.query('select * from Bidinfo_bidlist', [], function(err,rows){
+    var query = connection.query('SELECT `Bidinfo_bidlist`.*, '
+    +'(SELECT COUNT(*) FROM `Bidinfo_like` ' 
+    + 'WHERE `Bidinfo_bidlist`.id = `Bidinfo_like`.bid) AS likecount ' 
+    + 'FROM `Bidinfo_bidlist` order by date asc', [], function(err,rows){
         res.json(rows);
         console.log(rows);
     });

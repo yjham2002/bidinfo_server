@@ -23,6 +23,33 @@ connection.connect(function(err) {
     }
 });
 
+router.post('/send/all', bodyParser.urlencoded({
+    extended: true
+}), function(req, res) {
+    var query = connection.query('select `Token` from `Bidinfo_GCM` where `Status` <> 1', [], function(err,rows){
+        var tokens = [];
+        for(var i = 0; i < rows.length; i++){
+            tokens.push(rows[i].Token);
+        }
+        var message = {
+        registration_id: tokens, // required
+        collapse_key: 'Collapse key', 
+        'data.title': req.body.title,
+        'data.message': req.body.message
+        };
+        fcm.send(message, function(err, messageId){
+        if (err) {
+            console.log("Something has gone wrong!");
+        } else {
+            console.log("Sent with message ID: ", messageId);
+        }
+        });
+        res.json(tokens);
+        console.log(rows);
+    });
+    console.log(query);
+});
+
 router.post('/send/:id', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {

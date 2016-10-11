@@ -20,17 +20,7 @@ connection.connect(function(err) {
 });
 
 router.get('/:id', function(req, res) {
-    var query = connection.query('select * from Bidinfo_user where `id`=' + req.params.id, [], function(err,rows){
-        res.json(rows);
-        console.log(rows);
-    });
-    console.log(query);
-});
-
-router.post('/login', bodyParser.urlencoded({
-    extended: true
-}), function(req, res) {
-    var query = connection.query('select * FROM `Bidinfo_user` where `Uid`=\'' + req.body.Uid + '\' AND `Pwd`=\'' + req.body.Pwd + '\' ', [], function(err,rows){
+    var query = connection.query('select Token from Bidinfo_user where `id`=' + req.params.id + " and Status <> 1", [], function(err,rows){
         res.json(rows);
         console.log(rows);
     });
@@ -40,16 +30,8 @@ router.post('/login', bodyParser.urlencoded({
 router.post('/new', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {
-    var data = {
-        'Uid':req.body.Uid,
-        'Pwd':req.body.Pwd,
-        'Name':req.body.Name,
-        'ExpDate':req.body.ExpDate,
-        'Bdate':req.body.Bdate,
-        'Status':req.body.Status,
-        'Phone':req.body.Phone
-    };
-    var query = connection.query('insert into Bidinfo_user set ?', data, function(err,rows){
+    var query = connection.query('INSERT INTO Bidinfo_GCM(Token, mid) SELECT \''+ req.body.Token 
+    + '\', '+ req.body.mid +' FROM DUAL WHERE NOT EXISTS (SELECT * FROM Bidinfo_GCM WHERE Token=\''+ req.body.Token +'\')', [], function(err,rows){
         res.json(rows);
         console.log(rows);
     });
@@ -57,7 +39,7 @@ router.post('/new', bodyParser.urlencoded({
 });
 
 router.get('/', function(req, res) {
-    var query = connection.query('select * from Bidinfo_user', [], function(err,rows){
+    var query = connection.query('select * from Bidinfo_GCM', [], function(err,rows){
         res.json(rows);
         console.log(rows);
     });

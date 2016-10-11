@@ -29,8 +29,8 @@ router.get('/send/:id', bodyParser.urlencoded({
     var message = {
         registration_id: 'fk7gZNVvmjc:APA91bEdF3O8YyeX_UQCc-44naEk--dwj3MaPiwP4GxUrae_jfKXx7KQbrMms9XFPPvqgpOMvvcj99ajHTFXfIeIn7HS8hRi--9sYX0Ve_agZv0xL9emaHsmmsjJQwoMtYJrDfcnnNAN', // required
         collapse_key: 'Collapse key', 
-        'data.title': 'Title',
-        'data.message': 'Message sent from Node.js'
+        'data.title': '#keyword',
+        'data.message': '개체\\|테스팅'
     };
     fcm.send(message, function(err, messageId){
         if (err) {

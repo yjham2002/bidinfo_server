@@ -1,7 +1,9 @@
 var express = require('express');
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
+
 var FCM = require('fcm').FCM;
+var apiKey = 'AIzaSyDW9EBF7iPBaRAQHLvlYljQ1OyiFI-6RGs';
 var fcm = new FCM(apiKey);
 
 var connection = mysql.createConnection({
@@ -24,7 +26,6 @@ connection.connect(function(err) {
 router.post('/send/:id', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {
-    var apiKey = 'AIzaSyDW9EBF7iPBaRAQHLvlYljQ1OyiFI-6RGs';
     var message = {
         registration_id: 'fk7gZNVvmjc:APA91bEdF3O8YyeX_UQCc-44naEk--dwj3MaPiwP4GxUrae_jfKXx7KQbrMms9XFPPvqgpOMvvcj99ajHTFXfIeIn7HS8hRi--9sYX0Ve_agZv0xL9emaHsmmsjJQwoMtYJrDfcnnNAN', // required
         collapse_key: 'Collapse key',
@@ -33,9 +34,6 @@ router.post('/send/:id', bodyParser.urlencoded({
         'data.key1': 'value1',
         'data.key2': 'value2'
     };
-
-    
-
     fcm.send(message, function(err, messageId){
         if (err) {
             console.log("Something has gone wrong!");

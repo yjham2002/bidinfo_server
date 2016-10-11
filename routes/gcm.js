@@ -23,7 +23,7 @@ connection.connect(function(err) {
     }
 });
 
-router.get('/send/:id', bodyParser.urlencoded({
+router.post('/send/:id', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {
     var query = connection.query('select `Token` from `Bidinfo_GCM` where `mid`=' + req.params.id + ' and `Status` <> 1', [], function(err,rows){

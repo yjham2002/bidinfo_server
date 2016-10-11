@@ -20,7 +20,7 @@ connection.connect(function(err) {
 });
 
 router.get('/:id', function(req, res) {
-    var query = connection.query('select Token from Bidinfo_user where `id`=' + req.params.id + " and Status <> 1", [], function(err,rows){
+    var query = connection.query('select Token from Bidinfo_GCM where `mid`=' + req.params.id + " and Status <> 1", [], function(err,rows){
         res.json(rows);
         console.log(rows);
     });

@@ -40,6 +40,7 @@ router.post('/send/:id', bodyParser.urlencoded({
             console.log("Sent with message ID: ", messageId);
         }
         });
+        res.json(rows);
         console.log(rows);
     });
     console.log(query);

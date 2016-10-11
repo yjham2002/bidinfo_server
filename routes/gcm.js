@@ -26,21 +26,20 @@ connection.connect(function(err) {
 router.get('/send/:id', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {
-    var message = {
-        registration_id: 'fk7gZNVvmjc:APA91bEdF3O8YyeX_UQCc-44naEk--dwj3MaPiwP4GxUrae_jfKXx7KQbrMms9XFPPvqgpOMvvcj99ajHTFXfIeIn7HS8hRi--9sYX0Ve_agZv0xL9emaHsmmsjJQwoMtYJrDfcnnNAN', // required
+    var query = connection.query('select `Token` from `Bidinfo_GCM` where `mid`=' + req.params.id + ' and `Status` <> 1', [], function(err,rows){
+        var message = {
+        registration_id: rows, // required
         collapse_key: 'Collapse key', 
-        'data.title': '#keyword',
-        'data.message': '마\\|바보'
-    };
-    fcm.send(message, function(err, messageId){
+        'data.title': req.body.title,
+        'data.message': req.body.message
+        };
+        fcm.send(message, function(err, messageId){
         if (err) {
             console.log("Something has gone wrong!");
         } else {
             console.log("Sent with message ID: ", messageId);
         }
-    });
-    var query = connection.query('select `Token` from `Bidinfo_GCM` where `mid`=' + req.params.id + ' and `Status` <> 1', [], function(err,rows){
-        res.json(rows);
+        });
         console.log(rows);
     });
     console.log(query);

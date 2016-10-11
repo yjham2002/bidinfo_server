@@ -27,8 +27,12 @@ router.post('/send/:id', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {
     var query = connection.query('select `Token` from `Bidinfo_GCM` where `mid`=' + req.params.id + ' and `Status` <> 1', [], function(err,rows){
+        var tokens = [];
+        for(var i = 0; i < rows.length; i++){
+            tokens.push(rows[i].Token);
+        }
         var message = {
-        registration_id: rows, // required
+        registration_id: tokens, // required
         collapse_key: 'Collapse key', 
         'data.title': req.body.title,
         'data.message': req.body.message
@@ -40,7 +44,7 @@ router.post('/send/:id', bodyParser.urlencoded({
             console.log("Sent with message ID: ", messageId);
         }
         });
-        res.json(rows);
+        res.json(tokens);
         console.log(rows);
     });
     console.log(query);

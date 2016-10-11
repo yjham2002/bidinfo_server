@@ -28,11 +28,9 @@ router.get('/send/:id', bodyParser.urlencoded({
 }), function(req, res) {
     var message = {
         registration_id: 'fk7gZNVvmjc:APA91bEdF3O8YyeX_UQCc-44naEk--dwj3MaPiwP4GxUrae_jfKXx7KQbrMms9XFPPvqgpOMvvcj99ajHTFXfIeIn7HS8hRi--9sYX0Ve_agZv0xL9emaHsmmsjJQwoMtYJrDfcnnNAN', // required
-        collapse_key: 'Collapse key',
-        title:'title test',
-        msg:'msg test', 
-        'data.key1': 'value1',
-        'data.key2': 'value2'
+        collapse_key: 'Collapse key', 
+        'data.title': 'value1',
+        'data.msg': 'value2'
     };
     fcm.send(message, function(err, messageId){
         if (err) {

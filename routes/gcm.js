@@ -3,7 +3,7 @@ var mysql = require('mysql');
 var bodyParser = require('body-parser');
 
 var FCM = require('fcm').FCM;
-var apiKey = 'AIzaSyDW9EBF7iPBaRAQHLvlYljQ1OyiFI-6RGs';
+var apiKey = ' AIzaSyBm7Wp-8w9oAGKQdGQZuaOuAzg5zdiMSdI';
 var fcm = new FCM(apiKey);
 
 var connection = mysql.createConnection({
@@ -23,7 +23,7 @@ connection.connect(function(err) {
     }
 });
 
-router.post('/send/:id', bodyParser.urlencoded({
+router.get('/send/:id', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {
     var message = {

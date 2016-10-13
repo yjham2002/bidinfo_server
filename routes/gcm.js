@@ -32,19 +32,20 @@ router.post('/send/all', bodyParser.urlencoded({
             tokens.push(rows[i].Token);
         }
         var message = {
-        registration_id: tokens, // required
-        collapse_key: 'Collapse key', 
-        'data.title': req.body.title,
-        'data.message': req.body.message
+            registration_id: tokens, // required
+            collapse_key: 'Collapse key', 
+            'data.title': req.body.title,
+            'data.message': req.body.message
         };
         fcm.send(message, function(err, messageId){
-        if (err) {
-            console.log("Something has gone wrong!");
-        } else {
-            console.log("Sent with message ID: ", messageId);
-        }
+            if (err) {
+                console.log('Something has gone wrong!');
+                res.json(err + '/' + tokens);
+            } else {
+                console.log('Sent with message ID: ', messageId);
+                res.json(tokens);
+            }
         });
-        res.json(tokens);
         console.log(rows);
     });
     console.log(query);

@@ -49,7 +49,7 @@ router.post('/send/all', bodyParser.urlencoded({
         res.json(message);
         console.log(rows);
     });
-    console.log(query);
+    console.log(query + "/FLAGLOG");
 });
 
 router.post('/send/:id', bodyParser.urlencoded({

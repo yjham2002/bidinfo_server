@@ -45,8 +45,9 @@ router.post('/send/all', bodyParser.urlencoded({
         } else {
             console.log('Sent with message ID: ', messageId);
         }
-        });
         res.json(message);
+        });
+        
         console.log(rows);
     });
     console.log(query);

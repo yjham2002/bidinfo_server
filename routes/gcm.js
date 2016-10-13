@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 
 var FCM = require('fcm').FCM;
 var apiKey = 'AIzaSyBm7Wp-8w9oAGKQdGQZuaOuAzg5zdiMSdI';
+
 var fcm = new FCM(apiKey);
 
 var connection = mysql.createConnection({

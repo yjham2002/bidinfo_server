@@ -95,7 +95,7 @@ router.get('/', function(req, res) {
     +'WHERE `Bidinfo_bidlist`.id = `Bidinfo_like`.bid) AS likecount, '
     +'(SELECT COUNT( * ) FROM `Bidinfo_comment` '
     +'WHERE `Bidinfo_bidlist`.id = `Bidinfo_comment`.bid) AS commentcount'
-    +' FROM `Bidinfo_bidlist` WHERE title regexp(select hid from Bidinfo_user where id=1' + req.query.id + ')'
+    +' FROM `Bidinfo_bidlist` WHERE title regexp(select hid from Bidinfo_user where id=' + req.query.id + ')'
     +' OR hid regexp(select hid from Bidinfo_user where id=' + req.query.id + ') ORDER BY date DESC ', [], function(err,rows){
         res.json(rows);
         console.log(rows);

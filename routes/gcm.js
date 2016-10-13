@@ -3,7 +3,7 @@ var mysql = require('mysql');
 var bodyParser = require('body-parser');
 
 var FCM = require('fcm').FCM;
-var apiKey = ' AIzaSyBm7Wp-8w9oAGKQdGQZuaOuAzg5zdiMSdI';
+var apiKey = 'AIzaSyBm7Wp-8w9oAGKQdGQZuaOuAzg5zdiMSdI';
 var fcm = new FCM(apiKey);
 
 var connection = mysql.createConnection({
@@ -32,20 +32,19 @@ router.post('/send/all', bodyParser.urlencoded({
             tokens.push(rows[i].Token);
         }
         var message = {
-            registration_id: tokens, // required
-            collapse_key: 'Collapse key', 
-            'data.title': req.body.title,
-            'data.message': req.body.message
+        registration_id: tokens, // required
+        collapse_key: 'Collapse key', 
+        'data.title': req.body.title,
+        'data.message': req.body.message
         };
         fcm.send(message, function(err, messageId){
-            if (err) {
-                console.log('Something has gone wrong!');
-                res.json(err + '/' + tokens);
-            } else {
-                console.log('Sent with message ID: ', messageId);
-                res.json(tokens);
-            }
+        if (err) {
+            console.log("Something has gone wrong!");
+        } else {
+            console.log("Sent with message ID: ", messageId);
+        }
         });
+        res.json(tokens);
         console.log(rows);
     });
     console.log(query);

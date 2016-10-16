@@ -89,6 +89,14 @@ router.post('/new', bodyParser.urlencoded({
     console.log(query);
 });
 
+router.get('/count/:id', function(req, res) {
+    var query = connection.query('UPDATE Bidinfo_bidlist set `view`=`view`+1 where id='+req.params.id, [], function(err,rows){
+        res.json(rows);
+        console.log(rows);
+    });
+    console.log(query);
+});
+
 router.get('/', function(req, res) {
     var query = connection.query('SELECT `Bidinfo_bidlist` . * ,'
     +' (SELECT COUNT( * ) FROM `Bidinfo_like` '

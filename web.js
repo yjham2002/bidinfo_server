@@ -7,7 +7,7 @@ var notice = require('./routes/notice');
 var bodyParser = require('body-parser');
 
 // UnivTable
-var uniboard = require('uniroute/board');
+var uniboard = require('./uniroute/board');
 // UnivTable
 
 var app = express();

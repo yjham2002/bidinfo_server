@@ -5,6 +5,11 @@ var board = require('./routes/board');
 var gcm = require('./routes/gcm');
 var notice = require('./routes/notice');
 var bodyParser = require('body-parser');
+
+// UnivTable
+var uniboard = require('uniroute/board');
+// UnivTable
+
 var app = express();
 
 app.use('/', routes);
@@ -15,6 +20,11 @@ app.use('/notice', notice);
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
+
+// UnivTable
+app.use('/uniboard', uniboard);
+// UnivTable
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

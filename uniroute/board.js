@@ -33,8 +33,7 @@ router.post('/new', bodyParser.urlencoded({
     var data = {
         'mid':req.body.mid,
         'content':req.body.content,
-        'flag':req.body.flag,
-        'date':'NOW()'
+        'flag':req.body.flag
     };
     var query = connection.query('insert into univtable_article set ?', data, function(err,rows){
         res.json(rows);

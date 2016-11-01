@@ -17,14 +17,14 @@ app.use('/users', users);
 app.use('/board', board);
 app.use('/gcm', gcm);
 app.use('/notice', notice);
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-
 
 // UnivTable
 app.use('/uniboard', uniboard);
 // UnivTable
+
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

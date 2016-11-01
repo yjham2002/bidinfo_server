@@ -31,9 +31,9 @@ router.post('/new', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {
     var data = {
-        'mid':req.body.Uid,
-        'content':req.body.Pwd,
-        'flag':req.body.Name
+        'mid':req.body.mid,
+        'content':req.body.content,
+        'flag':req.body.flag
     };
     var query = connection.query('insert into univtable_article set ?', data, function(err,rows){
         res.json(rows);

@@ -29,6 +29,22 @@ router.post('/check', bodyParser.urlencoded({
     console.log(query);
 });
 
+router.post('/newc', bodyParser.urlencoded({
+    extended: true
+}), function(req, res) {
+    var data = {
+        'Amount':req.body.Amount,
+        'Comment':req.body.Comment,
+        'bid':req.body.bid,
+        'mid':req.body.mid
+    };
+    var query = connection.query('insert into Bidinfo_comment set ?', data, function(err,rows){
+        res.json(rows);
+        console.log(rows);
+    });
+    console.log(query);
+});
+
 router.post('/like', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {

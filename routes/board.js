@@ -98,10 +98,9 @@ router.get('/count/:id', function(req, res) {
 });
 
 router.get('/search', function(req, res) {
-    var query = connection.query('SELECT `Bidinfo_bidlist` . * ,'
-    +' (SELECT COUNT( * ) FROM `Bidinfo_like` ' + 'WHERE `Bidinfo_bidlist`.id = `Bidinfo_like`.bid) AS likecount, '
-    +'(SELECT COUNT( * ) FROM `Bidinfo_comment` ' + 'WHERE `Bidinfo_bidlist`.id = `Bidinfo_comment`.bid) AS commentcount'
-    +' FROM `Bidinfo_bidlist` WHERE title regexp(\'' + req.query.id + '\')' + ' OR hid regexp(\'' + req.query.id + '\') ORDER BY view desc, date DESC ', [], function(err,rows){
+    var query = connection.query('SELECT `Bidinfo_bidlist` . * ,(SELECT COUNT( * ) FROM `Bidinfo_like` WHERE `Bidinfo_bidlist`.id = `Bidinfo_like`.bid) '
+    +' AS likecount, (SELECT COUNT( * ) FROM `Bidinfo_comment` WHERE `Bidinfo_bidlist`.id = `Bidinfo_comment`.bid) AS commentcount FROM `Bidinfo_bidlist` '
+    +' WHERE Title regexp(\'' + req.query.id + '\') OR hid regexp(\'' + req.query.id + '\') ORDER BY view desc, date DESC', [], function(err,rows){
         res.json(rows);
         console.log(rows);
     });
@@ -116,7 +115,7 @@ router.get('/', function(req, res) {
     +'(SELECT COUNT( * ) FROM `Bidinfo_comment` '
     +'WHERE `Bidinfo_bidlist`.id = `Bidinfo_comment`.bid) AS commentcount'
     +' FROM `Bidinfo_bidlist` WHERE title regexp(select hid from Bidinfo_user where id=' + req.query.id + ')'
-    +' OR hid regexp(select hid from Bidinfo_user where id=' + req.query.id + ') ORDER BY view desc, date DESC ', [], function(err,rows){
+    +' OR hid regexp(select hid from Bidinfo_user where id=' + req.query.id + ') ORDER BY view desc, date DESC', [], function(err,rows){
         res.json(rows);
         console.log(rows);
     });

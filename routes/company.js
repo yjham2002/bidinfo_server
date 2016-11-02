@@ -20,17 +20,7 @@ connection.connect(function(err) {
 });
 
 router.get('/:id', function(req, res) {
-    var query = connection.query('select * from Bidinfo_user where `id`=' + req.params.id, [], function(err,rows){
-        res.json(rows);
-        console.log(rows);
-    });
-    console.log(query);
-});
-
-router.post('/login', bodyParser.urlencoded({
-    extended: true
-}), function(req, res) {
-    var query = connection.query('select * FROM `Bidinfo_user` where `Uid`=\'' + req.body.Uid + '\' AND `Pwd`=\'' + req.body.Pwd + '\' ', [], function(err,rows){
+    var query = connection.query('select * from Bidinfo_company where `id`=' + req.params.id, [], function(err,rows){
         res.json(rows);
         console.log(rows);
     });
@@ -41,20 +31,32 @@ router.post('/new', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {
     var data = {
-        'Uid':req.body.Uid,
-        'Pwd':req.body.Pwd,
         'Name':req.body.Name,
-        'ExpDate':req.body.ExpDate,
-        'Bdate':req.body.Bdate,
-        'Status':req.body.Status,
-        'Phone':req.body.Phone
+        'Rnum':req.body.Rnum,
+        'Rprt':req.body.Rprt,
+        'Charge':req.body.Charge,
+        'Addr':req.body.Addr,
+        'Phone':req.body.Phone,
+        'Email':req.body.Email,
+        'Divs':req.body.Divs,
+        'Divl':req.body.Divl,
+        'Expl':req.body.Expl,
+        'hid':req.body.hid,
+        'Pnum':req.body.Pnum
     };
-    var query = connection.query('insert into Bidinfo_user set ?', data, function(err,rows){
+    var query = connection.query('insert into Bidinfo_company set ?', data, function(err,rows){
         res.json(rows);
         console.log(rows);
     });
     console.log(query);
 });
 
+router.get('/', function(req, res) {
+    var query = connection.query('select * from Bidinfo_company order by `Name` asc', [], function(err,rows){
+        res.json(rows);
+        console.log(rows);
+    });
+    console.log(query);
+});
 
 module.exports = router;

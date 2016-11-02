@@ -22,8 +22,10 @@ connection.connect(function(err) {
     }
 });
 
-router.get('/', function(req, res) {
-    var str = req.query.id.toString('euckr');
+router.post('/', bodyParser.urlencoded({
+    extended: true
+}), function(req, res) {
+    var str = req.body.search;
     var query = connection.query('SELECT `Bidinfo_bidlist` . * ,(SELECT COUNT( * ) FROM `Bidinfo_like` WHERE `Bidinfo_bidlist`.id = `Bidinfo_like`.bid) '
     +' AS likecount, (SELECT COUNT( * ) FROM `Bidinfo_comment` WHERE `Bidinfo_bidlist`.id = `Bidinfo_comment`.bid) AS commentcount FROM `Bidinfo_bidlist` '
     +' WHERE Title regexp(\'' + str + '\') OR hid regexp(\'' + str + '\') ORDER BY view desc, date DESC', [], function(err,rows){

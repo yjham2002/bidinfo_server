@@ -8,10 +8,6 @@ var search = require('./routes/search');
 var company = require('./routes/company');
 var bodyParser = require('body-parser');
 
-// UnivTable
-var uniboard = require('./uniroute/board');
-// UnivTable
-
 var app = express();
 
 app.use('/', routes);
@@ -21,10 +17,6 @@ app.use('/users', users);
 app.use('/board', board);
 app.use('/gcm', gcm);
 app.use('/notice', notice);
-
-// UnivTable
-app.use('/uniboard', uniboard);
-// UnivTable
 
 app.use(bodyParser.urlencoded({
     extended: true
@@ -36,6 +28,10 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-app.listen(8001);
+app.listen(80);
+app.listen(8080);
+app.listen(443);
+
+console.log('Server running');
 
 module.exports = app;

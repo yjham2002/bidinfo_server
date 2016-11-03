@@ -8,11 +8,11 @@ var apiKey = 'AIzaSyDW9EBF7iPBaRAQHLvlYljQ1OyiFI-6RGs';
 var fcm = new FCM(apiKey);
 
 var connection = mysql.createConnection({
-  host    :'10.0.0.1',
+  host    :'localhost',
   port : 3306,
-  user : 'yjham2016',
-  password : 'gpswpf12',
-  database:'yjham2016'
+  user : 'root',
+  password : 'lelab2016',
+  database:'bidinfo'
 });
 var router = express.Router();
 

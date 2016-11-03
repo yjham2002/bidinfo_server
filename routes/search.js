@@ -1,18 +1,15 @@
 var express = require('express');
 var mysql = require('mysql');
-var iconv = require('iconv-lite');
 var bodyParser = require('body-parser');
 
 var connection = mysql.createConnection({
-  host    :'10.0.0.1',
+  host    :'localhost',
   port : 3306,
-  user : 'yjham2016',
-  password : 'gpswpf12',
-  database:'yjham2016'
+  user : 'root',
+  password : 'lelab2016',
+  database:'bidinfo'
 });
 var router = express.Router();
-
-iconv.extendNodeEncodings();
 
 connection.connect(function(err) {
     if (err) {

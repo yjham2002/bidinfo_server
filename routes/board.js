@@ -90,13 +90,16 @@ router.post('/new', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {
     var data = {
-        'Uid':req.body.Uid,
-        'Pwd':req.body.Pwd,
-        'Name':req.body.Name,
-        'ExpDate':req.body.ExpDate,
-        'Bdate':req.body.Bdate,
-        'Status':req.body.Status,
-        'Phone':req.body.Phone
+        'Title':req.body.Title,
+        'mid':req.body.mid,
+        'Dept':req.body.Dept,
+        'Url':req.body.Url,
+        'Bstart':req.body.Bstart,
+        'Bexpire':req.body.Bexpire,
+        'Charge':req.body.Charge,
+        'BidNo':req.body.BidNo,
+        'Type':req.body.Type,
+        'hid':req.body.hid
     };
     var query = connection.query('insert into Bidinfo_bidlist set ?', data, function(err,rows){
         res.json(rows);

@@ -3,7 +3,7 @@ CREATE TABLE Bidinfo_bidlist
 (
 	id                   INTEGER NOT NULL AUTO_INCREMENT,
 	hid                  TEXT NULL,
-	view                 INTEGER NULL,
+	view                 INTEGER NOT NULL DEFAULT 0,
 	mid                  INTEGER NULL,
 	Type                 INTEGER NULL,
 	Url                  TEXT NULL,

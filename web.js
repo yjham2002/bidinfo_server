@@ -7,8 +7,25 @@ var notice = require('./routes/notice');
 var search = require('./routes/search');
 var company = require('./routes/company');
 var bodyParser = require('body-parser');
-
+var index = require('./controller/index');
+var session = require('express-session');
 var app = express();
+
+
+// Web Section
+
+app.set('view engine','ejs');
+app.set('views','./views');
+
+// Web Session Section
+app.use(session({
+  secret:'bidinfo session',
+  resave:false,
+  saveUninitialized:true
+}));
+
+// Web Section
+app.use('/auth', index);
 
 app.use('/', routes);
 app.use('/search', search);

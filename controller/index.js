@@ -1,9 +1,31 @@
 var express = require('express');
 var session = require('express-session');
 var bodyParser = require('body-parser');
+var mysql = require('mysql');
+var connection = mysql.createConnection({
+  host    :'localhost',
+  port : 3306,
+  user : 'root',
+  password : 'lelab2016',
+  database:'bidinfo'
+});
+
 var router = express.Router();
 
-router.get('/login', function(req, res, next){
+connection.connect(function(err) {
+    if (err) {
+        console.error('mysql connection error');
+        console.error(err);
+        throw err;
+    }
+});
+
+router.get('/', function(req, res, next){
+  res.redirect('/web/main');
+});
+
+
+router.get('/main', function(req, res, next){
   if(req.session.logined) {
     res.render('logout', {session: req.session});
   }
@@ -11,22 +33,34 @@ router.get('/login', function(req, res, next){
     res.render('login', {session: req.session});
   }
 });
- 
-router.post('/login', bodyParser.urlencoded({
+
+router.post('/main', bodyParser.urlencoded({
     extended: true
 }), function(req, res, next){
-  if(req.body.id == 'admin' && req.body.pw == '1234'){
-  req.session.regenerate(function(){
-    req.session.logined = true;
-    req.session.user_id = req.body.id;
-    res.render('logout', {session: req.session});
-  })
-  }
+  var query = connection.query('select * FROM `Bidinfo_user` where `Uid`=\'' + req.body.id 
+  + '\' AND `Pwd`=\'' + req.body.pw + '\' ', [], function(err,rows){
+    var userId = rows[0].id;
+    if(rows.length == 1){
+      req.session.regenerate(function(){
+        var retrieve = connection.query('select id, Title, Date, Url from `Bidinfo_bidlist` where id in (select bid from `Bidinfo_like` where mid= ? ) order by Date asc', userId, function(err,rows){
+          req.session.logined = true;
+          req.session.user_id = req.body.id;
+          res.render('logout', {session: req.session, article: rows});
+          console.log(rows);
+        });
+      })
+    }else{
+      req.session.destroy();
+      res.redirect('/web/main');
+    }
+    console.log(rows);
+    });
+    console.log(query);
 });
  
 router.post('/logout', function(req,res,next){
   req.session.destroy();
-  res.redirect('/auth/login');
+  res.redirect('/web/main');
 });
 
 module.exports = router;

@@ -1,19 +1,44 @@
-<!DOCTYPE html>
-
+<!DOCTYPE HTML>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>TEST</title>
-  </head>
-  <body>
-   <%-JSON.stringify(session)%>
-    <form action="/auth/login" method="post">
-      <label for="id"> ID</label>
-      <input id="id" name="id" type="text" placeholder="ID를 입력해주세요">
-      <br/>
-      <label for="pw"> PW</label>
-      <input id="pw" name="pw" type="password" placeholder="Password를 입력해주세요">
-      <button type="submit">로그인</button>
-    </form>
-  </body>
+	<head>
+		<title>::검색없는 맞춤 정보::영업맨::</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="/assets/css/main.css" />
+	</head>
+	<body>
+
+			<section id="footer">
+				<header class="major">
+				<br><br><br>
+				<img src = /images/ico.png width=128 height=128/>
+				<br>
+					<h1>영업맨</h1>
+				</header>
+				<div class="container">
+					<form action="/web/main" method="post">
+						<div class="row uniform">
+							<div class="12u$"><input type="text" value="admin@lelab.com" name="id" id="id" placeholder="이메일" required="이메일을 입력하세요"/></div>
+              <div class="12u$">
+			  <input type="password" name="pw" id="pw" value="lelab2016" placeholder="패스워드" required="패스워드를 입력하세요"/></div>
+							<div class="12u$">
+								<ul class="actions">
+									<li><input type="submit" value="로그인" class="special" /></li>
+								</ul>
+							</div>
+						</div>
+					</form>
+
+				</div>
+			</section>
+
+
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
 </html>

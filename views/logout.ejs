@@ -1,14 +1,94 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>LOGGED OUT</title>
-  </head>
-  <body>
-    <%-JSON.stringify(session)%>
-    <form action="/auth/logout" method="post">
-      <button type="submit">Logout</button>
-    </form>
-  </body>
+	<head>
+		<title>::검색없는 맞춤 정보::영업맨::</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="/assets/css/main.css" />
+	</head>
+	<body>
+
+			<section id="header">
+				<header class="major">
+					<h1>CopyNow</h1>
+					<p>검색없는 맞춤 정보 <a href="#">영업맨</a></p>
+				</header>
+				<div class="container">
+					<ul class="actions">
+						<li><a href="#one" class="button special scrolly">시작하기</a></li>
+					</ul>
+				</div>
+			</section>
+
+		<!-- One -->
+			<section id="one" class="main special">
+				<div class="container">
+					<div class="content">
+						<header class="major">
+							<h2>CLIP LIST</h2>
+						</header>
+						<form method="post" action="host.php?tr=109">
+						<div class="row uniform">
+							<div class="12u$"><textarea name="cont" id="cont" placeholder="Paste Here!" rows="4"></textarea></div>
+							<div class="12u$">
+								<ul class="actions">
+									<li><input type="submit" value="SUBMIT" class="special" /></li>
+								</ul>
+							</div>
+						</div>
+					</form>
+						<p>
+						<table>
+						<tr>
+						<td>No.</td>
+						<td>Title</td>
+						<td>Date</td>
+						<td>Link</td>
+						</tr>
+						<% article.forEach(function(item, index){ %>
+						<tr>
+						<td><%=item.id%></td>
+						<td><%=item.Title%></td>
+						<td><%=item.Date%></td>
+						<td><a href='<%=item.Url%>'>링크</a></td>
+						</tr>
+						<% }); %>
+						</table>
+						</p>
+					</div>
+					<a href="#two" class="goto-next scrolly">Next</a>
+				</div>
+			</section>
+
+			<section id="footer">
+				<div class="container">
+					<header class="major">
+						<h2>Good Bye!</h2>
+					</header>
+					<form method="post" action="/web/logout">
+						<div class="row uniform">
+							<div class="12u$">
+								<ul class="actions">
+									<li>
+                    					<button type="submit">Logout</button>
+                  					</li>
+								</ul>
+							</div>
+						</div>
+					</form>
+				</div>
+				<footer>
+					<ul class="copyright">
+						<li>&copy; 경관공학연구소</li>
+					</ul>
+				</footer>
+			</section>
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
 </html>
- 

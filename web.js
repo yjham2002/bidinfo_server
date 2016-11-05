@@ -17,6 +17,8 @@ var app = express();
 app.set('view engine','ejs');
 app.set('views','./views');
 
+app.use(express.static(__dirname + '/public'));
+
 // Web Session Section
 app.use(session({
   secret:'bidinfo session',
@@ -25,7 +27,7 @@ app.use(session({
 }));
 
 // Web Section
-app.use('/auth', index);
+app.use('/web', index);
 
 app.use('/', routes);
 app.use('/search', search);

@@ -36,7 +36,7 @@
 						<td>Date</td>
 						<td>Link</td>
 						</tr>
-						<% article.forEach(function(item, index){ %>
+						<% if(typeof article != 'undefined') article.forEach(function(item, index){ %>
 						<tr>
 						<td><%=item.id%></td>
 						<td><%=item.Title%></td>

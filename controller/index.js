@@ -42,12 +42,22 @@ router.post('/main', bodyParser.urlencoded({
     var userId = rows[0].id;
     if(rows.length == 1){
       req.session.regenerate(function(){
-        var retrieve = connection.query('select id, Title, Date, Url from `Bidinfo_bidlist` where id in (select bid from `Bidinfo_like` where mid= ? ) order by Date asc', userId, function(err,rows){
+        if(rows[0].Uid == 'admin@lelab.com'){
+          var retrieve = connection.query('select id, Title, Date, Url from `Bidinfo_bidlist` where id in (select bid from `Bidinfo_like` where mid= ? ) order by Date asc', userId, function(err,rows){
+          req.session.logined = true;
+          req.session.user_id = req.body.id;
+          res.render('admin', {session: req.session, article: rows});
+          console.log(rows);
+          });
+        }
+        else{
+          var retrieve = connection.query('select id, Title, Date, Url from `Bidinfo_bidlist` where id in (select bid from `Bidinfo_like` where mid= ? ) order by Date asc', userId, function(err,rows){
           req.session.logined = true;
           req.session.user_id = req.body.id;
           res.render('logout', {session: req.session, article: rows});
           console.log(rows);
-        });
+          });
+        }
       })
     }else{
       req.session.destroy();

@@ -51,7 +51,14 @@
 								<h2>Notification List</h2>
 							</header>
 
-								<p>To Print</p>
+								<p>공지사항을 추가하며 함께 푸시알림을 보냅니다</p>
+								<form method='POST' action='/notice/new'>
+									<input type='text' name='Title' id='Title' placeholder='제목'/>
+									<br>
+									<input type='text' name='Content' id='Content' placeholder='내용'/>
+									<br>
+									<input type='submit' value='보내기'/>
+								</form>
 
 						</div>
 					</section>

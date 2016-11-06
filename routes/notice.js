@@ -1,6 +1,10 @@
 var express = require('express');
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
+var FCM = require('fcm').FCM;
+var apiKey = 'AIzaSyDW9EBF7iPBaRAQHLvlYljQ1OyiFI-6RGs';
+
+var fcm = new FCM(apiKey);
 
 var connection = mysql.createConnection({
   host    :'localhost',
@@ -43,7 +47,24 @@ router.post('/new', bodyParser.urlencoded({
         'Content':req.body.Content
     };
     var query = connection.query('insert into `Bidinfo_notice` set ?', data, function(err,rows){
-        res.json(rows);
+        var request = require('request');
+        var headers = {
+            'User-Agent':       'Super Agent/0.0.1',
+            'Content-Type':     'application/x-www-form-urlencoded'
+        }
+        var options = {
+            url: 'http://lelab.cafe24.com/gcm/send/all',
+            method:'POST',
+            headers: headers,
+            form: {'title': req.body.Title, 'message': req.body.Content}
+        }
+        request(options, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log(body)
+            }
+        })
+
+        res.redirect('/web/main');
         console.log(rows);
     });
     console.log(query);

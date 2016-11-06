@@ -26,12 +26,7 @@ router.get('/', function(req, res, next){
 
 
 router.get('/main', function(req, res, next){
-  if(req.session.logined) {
-    res.render('logout', {session: req.session});
-  }
-  else {
     res.render('login', {session: req.session});
-  }
 });
 
 router.post('/main', bodyParser.urlencoded({
@@ -46,6 +41,7 @@ router.post('/main', bodyParser.urlencoded({
           var retrieve = connection.query('select id, Title, Date, Url from `Bidinfo_bidlist` where id in (select bid from `Bidinfo_like` where mid= ? ) order by Date asc', userId, function(err,rows){
           req.session.logined = true;
           req.session.user_id = req.body.id;
+          req.session.idnum = userId;
           res.render('admin', {session: req.session, article: rows});
           console.log(rows);
           });
@@ -54,6 +50,7 @@ router.post('/main', bodyParser.urlencoded({
           var retrieve = connection.query('select id, Title, Date, Url from `Bidinfo_bidlist` where id in (select bid from `Bidinfo_like` where mid= ? ) order by Date asc', userId, function(err,rows){
           req.session.logined = true;
           req.session.user_id = req.body.id;
+          req.session.idnum = userId;
           res.render('logout', {session: req.session, article: rows});
           console.log(rows);
           });

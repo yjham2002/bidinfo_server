@@ -27,7 +27,6 @@ app.use(session({
 }));
 
 // Web Section
-app.use('/web', index);
 
 app.use('/', routes);
 app.use('/search', search);
@@ -36,6 +35,7 @@ app.use('/users', users);
 app.use('/board', board);
 app.use('/gcm', gcm);
 app.use('/notice', notice);
+app.use('/web', index);
 
 app.use(bodyParser.urlencoded({
     extended: true

@@ -37,6 +37,32 @@ router.post('/login', bodyParser.urlencoded({
     console.log(query);
 });
 
+router.get('/like/:id', function(req, res) {
+    var query = connection.query('SELECT `Bidinfo_bidlist` . * ,'
+    +' (SELECT COUNT( * ) FROM `Bidinfo_like` '
+    +'WHERE `Bidinfo_bidlist`.id = `Bidinfo_like`.bid) AS likecount, '
+    +'(SELECT COUNT( * ) FROM `Bidinfo_comment` '
+    +'WHERE `Bidinfo_bidlist`.id = `Bidinfo_comment`.bid) AS commentcount'
+    +' FROM `Bidinfo_bidlist` where `Bidinfo_bidlist`.id in (select bid from `Bidinfo_like` where mid= ? ) order by Date asc', req.params.id, function(err,rows){
+        res.json(rows);
+        console.log(rows);
+    });
+    console.log(query);
+});
+
+router.get('/attend/:id', function(req, res) {
+    var query = connection.query('SELECT `Bidinfo_bidlist` . * ,'
+    +' (SELECT COUNT( * ) FROM `Bidinfo_like` '
+    +'WHERE `Bidinfo_bidlist`.id = `Bidinfo_like`.bid) AS likecount, '
+    +'(SELECT COUNT( * ) FROM `Bidinfo_comment` '
+    +'WHERE `Bidinfo_bidlist`.id = `Bidinfo_comment`.bid) AS commentcount'
+    +' FROM `Bidinfo_bidlist` where `Bidinfo_bidlist`.id in (select bid from `Bidinfo_comment` where mid= ? ) order by Date asc', req.params.id, function(err,rows){
+        res.json(rows);
+        console.log(rows);
+    });
+    console.log(query);
+});
+
 router.post('/new', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {

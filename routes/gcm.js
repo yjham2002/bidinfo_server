@@ -93,9 +93,11 @@ router.post('/new', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {
     var query = connection.query('INSERT INTO Bidinfo_GCM(Token, mid, Status) SELECT \''+ req.body.Token 
-    + '\', '+ req.body.mid +', 0 FROM DUAL WHERE NOT EXISTS (SELECT * FROM Bidinfo_GCM WHERE Token=\''+ req.body.Token +'\')', [], function(err,rows){
-        res.json(rows);
-        console.log(rows);
+    + '\', '+ req.body.mid +', 0 FROM DUAL WHERE NOT EXISTS (SELECT * FROM Bidinfo_GCM WHERE Token=\''+ req.body.Token +'\'); ', [], function(err,rows){
+        var query2 = connection.query('UPDATE Bidinfo_GCM set mid=' + req.body.mid + ' where Token=\'' + req.body.Token + '\'', function(err, rows){
+            res.json(rows);
+            console.log(rows); 
+        });
     });
     console.log(query);
 });

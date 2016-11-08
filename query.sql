@@ -15,7 +15,7 @@ CREATE TABLE Bidinfo_bidlist
 	PDate                TEXT NULL,
 	Dept                 TEXT NULL,
 	Charge               TEXT NULL,
-	Date                 TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	Date                 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY ( `id` )
 );
 
@@ -24,7 +24,7 @@ CREATE TABLE Bidinfo_comment
 	id                   INTEGER NOT NULL AUTO_INCREMENT,
 	Comment              TEXT NULL,
 	Amount               TEXT NULL,
-	Date                 TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+	Date                 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
 	mid                  INTEGER NOT NULL,
 	bid                  INTEGER NOT NULL,
 	PRIMARY KEY ( `id` )

@@ -40,7 +40,7 @@ router.post('/login', bodyParser.urlencoded({
 router.post('/tag', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {
-    var query = connection.query('UPDATE `Bidinfo_user` SET `hid`=\'' + req.body.hid + '\'', [], function(err,rows){
+    var query = connection.query('UPDATE `Bidinfo_user` SET `hid`=\'' + req.body.hid + '\' where id = ' + req.body.id, [], function(err,rows){
         res.json(rows);
         console.log(rows);
     });

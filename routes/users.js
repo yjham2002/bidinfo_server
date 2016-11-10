@@ -37,6 +37,16 @@ router.post('/login', bodyParser.urlencoded({
     console.log(query);
 });
 
+router.post('/red', bodyParser.urlencoded({
+    extended: true
+}), function(req, res) {
+    var query = connection.query('select * FROM `Bidinfo_user` where `Uid`=\'' + req.body.Uid + '\'', [], function(err,rows){
+        res.json(rows);
+        console.log(rows);
+    });
+    console.log(query);
+});
+
 router.post('/tag', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {
@@ -80,16 +90,15 @@ router.post('/new', bodyParser.urlencoded({
         'Uid':req.body.Uid,
         'Pwd':req.body.Pwd,
         'Name':req.body.Name,
-        'ExpDate':req.body.ExpDate,
+        'Phone':req.body.Phone,
+        'symbol':req.body.Symbol,
         'Bdate':req.body.Bdate,
-        'Status':req.body.Status,
-        'Phone':req.body.Phone
+        'hid':req.body.hid
     };
-    var query = connection.query('insert into Bidinfo_user set ?', data, function(err,rows){
-        res.json(rows);
-        console.log(rows);
-    });
-    console.log(query);
+    var query = connection.query('insert into `Bidinfo_user` set ?', data, function(err,rows){
+                res.json(rows);
+                console.log(rows);
+            });
 });
 
 

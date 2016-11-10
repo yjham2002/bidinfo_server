@@ -37,6 +37,16 @@ router.post('/login', bodyParser.urlencoded({
     console.log(query);
 });
 
+router.post('/tag', bodyParser.urlencoded({
+    extended: true
+}), function(req, res) {
+    var query = connection.query('UPDATE `Bidinfo_user` SET `hid`=\'' + req.body.hid + '\'', [], function(err,rows){
+        res.json(rows);
+        console.log(rows);
+    });
+    console.log(query);
+});
+
 router.get('/like/:id', function(req, res) {
     var query = connection.query('SELECT `Bidinfo_bidlist` . * ,'
     +' (SELECT COUNT( * ) FROM `Bidinfo_like` '

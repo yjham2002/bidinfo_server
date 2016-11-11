@@ -45,6 +45,26 @@ router.post('/newc', bodyParser.urlencoded({
     console.log(query);
 });
 
+router.post('/removes/:id', bodyParser.urlencoded({
+    extended: true
+}), function(req, res) {
+    var query = connection.query('DELETE FROM Bidinfo_bidlist where id=?', req.params.id, function(err,rows){
+        res.json(rows);
+        console.log(rows);
+    });
+    console.log(query);
+});
+
+router.post('/remove/comment', bodyParser.urlencoded({
+    extended: true
+}), function(req, res) {
+    var query = connection.query('DELETE FROM Bidinfo_comment where bid=' + req.body.bid + ' and mid=' + req.body.mid, [], function(err,rows){
+        res.json(rows);
+        console.log(rows);
+    });
+    console.log(query);
+});
+
 router.post('/like', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {

@@ -49,8 +49,10 @@ router.post('/removes/:id', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {
     var query = connection.query('DELETE FROM Bidinfo_bidlist where id=?', req.params.id, function(err,rows){
-        res.json(rows);
-        console.log(rows);
+        var que = connection.query('DELETE FROM Bidinfo_comment where bid=?', req.params.id, function(err,rows){
+            res.json(rows);
+            console.log(rows);
+        });
     });
     console.log(query);
 });
@@ -58,7 +60,7 @@ router.post('/removes/:id', bodyParser.urlencoded({
 router.post('/remove/comment', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {
-    var query = connection.query('DELETE FROM Bidinfo_comment where bid=' + req.body.bid + ' and mid=' + req.body.mid, [], function(err,rows){
+    var query = connection.query('DELETE FROM Bidinfo_comment where id=' + req.body.id, [], function(err,rows){
         res.json(rows);
         console.log(rows);
     });
@@ -145,7 +147,7 @@ router.get('/', function(req, res) {
     +' FROM `Bidinfo_bidlist` WHERE title regexp(select hid from Bidinfo_user where id=' + req.query.id + ')'
     +' OR hid regexp(select hid from Bidinfo_user where id=' + req.query.id + ') ORDER BY view desc, date DESC', [], function(err,rows){
         res.json(rows);
-        console.log(rows);
+        //console.log(rows);
     });
     console.log(query);
 });

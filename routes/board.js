@@ -99,6 +99,15 @@ router.get('/:id', function(req, res) {
     console.log(query);
 });
 
+router.get('/pcomment/:id', function(req, res) {
+    var query = connection.query('SELECT `Bidinfo_comment`.*, (SELECT Name FROM `Bidinfo_user` WHERE `Bidinfo_comment`.mid = `Bidinfo_user`.id) '
+    +'AS userName FROM `Bidinfo_comment` WHERE `bid` in (SELECT id from Bidinfo_bidlist where mid=' + req.params.id +') and mid <> '+ req.params.id +' ORDER BY date DESC', [], function(err,rows){
+        res.json(rows);
+        console.log(rows);
+    });
+    console.log(query);
+});
+
 router.get('/comment/:id', function(req, res) {
     var query = connection.query('SELECT `Bidinfo_comment`.*, (SELECT Name FROM `Bidinfo_user` WHERE `Bidinfo_comment`.mid = `Bidinfo_user`.id) '
     +'AS userName FROM `Bidinfo_comment` WHERE `bid`=' + req.params.id +' ORDER BY date DESC', [], function(err,rows){

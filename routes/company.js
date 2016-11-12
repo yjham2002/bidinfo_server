@@ -27,6 +27,27 @@ router.get('/one/:id', function(req, res) {
     console.log(query);
 });
 
+router.post('/updates', bodyParser.urlencoded({
+    extended: true
+}), function(req, res) {
+    var data = {
+        'Name':req.body.Name,
+        'Rnum':req.body.Rnum,
+        'Rprt':req.body.Rprt,
+        'Charge':req.body.Charge,
+        'Addr':req.body.Addr,
+        'Phone':req.body.Phone,
+        'Email':req.body.Email,
+        'Expl':req.body.Expl,
+        'hid':req.body.hid
+    };
+    var query = connection.query('update Bidinfo_company set ? where id=' + req.body.id, data, function(err,rows){
+        res.json(rows);
+        console.log(rows);
+    });
+    console.log(query);
+});
+
 router.post('/new', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {
@@ -38,11 +59,8 @@ router.post('/new', bodyParser.urlencoded({
         'Addr':req.body.Addr,
         'Phone':req.body.Phone,
         'Email':req.body.Email,
-        'Divs':req.body.Divs,
-        'Divl':req.body.Divl,
         'Expl':req.body.Expl,
-        'hid':req.body.hid,
-        'Pnum':req.body.Pnum
+        'hid':req.body.hid
     };
     var query = connection.query('insert into Bidinfo_company set ?', data, function(err,rows){
         res.json(rows);

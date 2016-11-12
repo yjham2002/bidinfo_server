@@ -44,11 +44,10 @@ router.post('/send/all', bodyParser.urlencoded({
     console.log(query + "/FLAGLOG");
 });
 
-router.post('/send/:id', bodyParser.urlencoded({
+router.post('/sends/:id', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {
-    var query = connection.query('select `Token` from `Bidinfo_GCM` where `mid`=' 
-    + req.params.id + ' and `Status` <> 1', [], 
+    var query = connection.query('select `Token` from `Bidinfo_GCM` where `mid`=' + req.params.id + ' and `Status` <> 1', [], 
     function(err,rows){
         for(var i = 0; i < rows.length; i++){
             var message = {
@@ -59,7 +58,7 @@ router.post('/send/:id', bodyParser.urlencoded({
             };
             fcm.send(message, function(err, messageId){});
         }
-        res.json(tokens);
+        res.json(message);
         console.log(rows);
     });
     console.log(query);

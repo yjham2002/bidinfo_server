@@ -27,6 +27,17 @@ router.get('/one/:id', function(req, res) {
     console.log(query);
 });
 
+router.post('/search', bodyParser.urlencoded({
+    extended: true
+}), function(req, res) {
+    var str = req.body.search;
+    var query = connection.query('SELECT * from Bidinfo_company where Name regexp(\'' + str + '\') OR ' + 'Rprt regexp(\'' + str + '\') OR ' + 'hid regexp(\'' + str + '\')', [], function(err,rows){
+        res.json(rows);
+        console.log(rows);
+    });
+    console.log(query);
+});
+
 router.post('/updates', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {

@@ -19,7 +19,7 @@ connection.connect(function(err) {
     }
 });
 
-router.get('/:id', function(req, res) {
+router.get('/one/:id', function(req, res) {
     var query = connection.query('select * from Bidinfo_company where `id`=' + req.params.id, [], function(err,rows){
         res.json(rows);
         console.log(rows);
@@ -45,6 +45,15 @@ router.post('/new', bodyParser.urlencoded({
         'Pnum':req.body.Pnum
     };
     var query = connection.query('insert into Bidinfo_company set ?', data, function(err,rows){
+        res.json(rows);
+        console.log(rows);
+    });
+    console.log(query);
+});
+
+router.get('/select', function(req, res) {
+    var query = connection.query('select * from `Bidinfo_company` '
+    +'where `Bidinfo_company`.`hid` regexp(select `Bidinfo_bidlist`.`hid` from `Bidinfo_bidlist` where `Bidinfo_bidlist`.`id` = '+ req.query.id +') order by `Name` asc', [], function(err,rows){
         res.json(rows);
         console.log(rows);
     });

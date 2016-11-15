@@ -24,6 +24,9 @@ router.get('/', function(req, res, next){
   res.redirect('/web/main');
 });
 
+router.get('/company', function(req, res, next){
+    res.render('company', {session: req.session});
+});
 
 router.get('/main', function(req, res, next){
     res.render('login', {session: req.session});

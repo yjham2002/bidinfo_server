@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>영업맨 회사정보 추가</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="/a_assets/css/main.css" />
+	</head>
+	<body>
+
+			<div id="header">
+				<div class="top">
+						<div id="logo">
+							<h1 id="title">Guest</h1>
+							<p>경관공학연구소</p>
+						</div>
+						<nav id="nav">
+							<ul>
+								<li><a href="#mList" id="portfolio-link" class="skel-layers-ignoreHref"><span class="icon fa-th">Information</span></a></li>
+							</ul>
+						</nav>
+
+				</div>
+
+			</div>
+
+		<!-- Main -->
+			<div id="main">
+				<!-- Intro -->
+					<section id="top" class="one dark cover">
+						<div class="container">
+
+							<header>
+								<h2 class="alt">영업맨</h2>
+								<p>검색 없는 맞춤 정보</p>
+								
+							</header>
+<footer>
+													
+							</footer>
+						</div>
+					</section>
+				<!-- Notification -->
+					<section id="mList" class="two">
+						<div class="container">
+
+							<header>
+								<h2>Form</h2>
+							</header>
+
+								<p>영업맨 데이터베이스에 회사 정보를 추가합니다.</p>
+								<form method='POST' action='/company/new'>
+									<input type='text' name='Name' id='Name' placeholder='회사명'/>
+									<br>
+									<input type='text' name='Addr' id='Addr' placeholder='주소'/>
+									<br>
+									<input type='text' name='Phone' id='Phone' placeholder='연락처'/>
+									<br>
+									<input type='text' name='hid' id='hid' placeholder='키워드(Bar 기호 구분)'/>
+									<br>
+									<input type=hidden name='Rnum' value='미제공'>
+									<input type=hidden name='Rprt' value='미제공'>
+									<input type=hidden name='Charge' value='미제공'>
+									<input type=hidden name='Email' value='미제공'>
+									<input type=hidden name='Expl' value='미제공'>
+									<input type='submit' value='보내기'/>
+								</form>
+
+						</div>
+					</section>
+
+
+
+		<!-- Scripts -->
+			<script src="/a_assets/js/jquery.min.js"></script>
+			<script src="/a_assets/js/jquery.scrolly.min.js"></script>
+			<script src="/a_assets/js/jquery.scrollzer.min.js"></script>
+			<script src="/a_assets/js/skel.min.js"></script>
+			<script src="/a_assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/a_assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/a_assets/js/main.js"></script>
+
+	</body>
+</html>

@@ -76,7 +76,8 @@ router.get('/attend/:id', function(req, res) {
     +'WHERE `Bidinfo_bidlist`.id = `Bidinfo_like`.bid) AS likecount, '
     +'(SELECT COUNT( * ) FROM `Bidinfo_comment` '
     +'WHERE `Bidinfo_bidlist`.id = `Bidinfo_comment`.bid) AS commentcount'
-    +' FROM `Bidinfo_bidlist` where `Bidinfo_bidlist`.id in (select bid from `Bidinfo_comment` where mid= ? ) order by Date asc', req.params.id, function(err,rows){
+    +' FROM `Bidinfo_bidlist` where `Bidinfo_bidlist`.id in (select bid from `Bidinfo_comment` where mid= '
+    +req.params.id+') OR `Bidinfo_bidlist`.mid='+req.params.id+' order by Date asc', [], function(err,rows){
         res.json(rows);
         console.log(rows);
     });

@@ -2,7 +2,7 @@
 
 <html>
 	<head>
-		<title>영업맨 회사정보 추가</title>
+		<title>영업맨 크롤링 사이트 추가</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="/a_assets/css/main.css" />
@@ -49,23 +49,16 @@
 								<h2>Form</h2>
 							</header>
 
-								<p>영업맨 데이터베이스에 회사 정보를 추가합니다.</p>
-							<h5>주의) 5번째 항목은 홈페이지 주소로서, 필히 http:// 혹은 https://가 붙어야하며, 정보가 없을 경우, 꼭 미제공 상태로 두어야 함.</h5>
-								<form method='POST' action='/company/new'>
-									<input type='text' name='Name' id='Name' placeholder='회사명'/>
+								<p>영업맨 데이터베이스에 크롤링 사이트를 추가합니다.</p>
+							<h5>주의) 입찰(물품0/공사1/용역2/미분류3), 계약(물품4/공사5/용역6/미분류7)</h5>
+								<form method='POST' action='/company/crawler'>
+									<input type='text' name='Name' id='Name' placeholder='출처/담당처(ex:서울시 나라장터)'/>
 									<br>
-									<input type='text' name='Addr' id='Addr' placeholder='주소'/>
+									<input type='text' name='Url' id='Url' placeholder='주소(http:// 혹은 https:// 필수)'/>
 									<br>
-									<input type='text' name='Phone' id='Phone' placeholder='연락처'/>
+									<input type='text' name='Status' id='Status' placeholder='구분번호(필히 위 구분번호 참조)'/>
 									<br>
-									<input type='text' name='hid' id='hid' placeholder='키워드(Bar 기호 구분)'/>
-									<br>
-									<input type='text' name='Expl' id='Expl' value='미제공'/>
-									<br>
-									<input type=hidden name='Rnum' value='미제공'>
-									<input type=hidden name='Rprt' value='미제공'>
-									<input type=hidden name='Charge' value='미제공'>
-									<input type=hidden name='Email' value='미제공'>
+									<input type=hidden name='LastGet' value='0'>
 						
 									<input type='submit' value='보내기'/>
 								</form>

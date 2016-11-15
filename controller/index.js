@@ -28,6 +28,10 @@ router.get('/company', function(req, res, next){
     res.render('company', {session: req.session});
 });
 
+router.get('/crawler', function(req, res, next){
+    res.render('crawler', {session: req.session});
+});
+
 router.get('/main', function(req, res, next){
     res.render('login', {session: req.session});
 });

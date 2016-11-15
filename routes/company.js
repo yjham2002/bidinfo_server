@@ -59,6 +59,22 @@ router.post('/updates', bodyParser.urlencoded({
     console.log(query);
 });
 
+router.post('/crawler', bodyParser.urlencoded({
+    extended: true
+}), function(req, res) {
+    var data = {
+        'Name':req.body.Name,
+        'Url':req.body.Url,
+        'Status':req.body.Status,
+        'LastGet':req.body.LastGet
+    };
+    var query = connection.query('insert into Bidinfo_crawler set ?', data, function(err,rows){
+        res.json(rows);
+        console.log(rows);
+    });
+    console.log(query);
+});
+
 router.post('/new', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {

@@ -31,6 +31,16 @@ router.get('/recent', function(req, res) {
     console.log(query);
 });
 
+router.post('/removes/:id', bodyParser.urlencoded({
+    extended: true
+}), function(req, res) {
+    var query = connection.query('DELETE FROM Bidinfo_notice where id=?', req.params.id, function(err,rows){
+        res.json(rows);
+        console.log(rows);
+    });
+    console.log(query);
+});
+
 router.get('/:id', function(req, res) {
     var query = connection.query('select * from `Bidinfo_notice` where `id`=' + req.params.id, [], function(err,rows){
         res.json(rows);

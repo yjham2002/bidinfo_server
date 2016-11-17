@@ -84,6 +84,20 @@ router.get('/attend/:id', function(req, res) {
     console.log(query);
 });
 
+router.post('/cpass', bodyParser.urlencoded({
+    extended: true
+}), function(req, res) {
+    var data = {
+        'id':req.body.id,
+        'Pwd':req.body.Pwd
+    };
+    var query = connection.query('Update `Bidinfo_user` set `Pwd`=\'' + req.body.Pwd 
+    + '\' where `id`=' + req.body.id, [], function(err,rows){
+                res.json(rows);
+                console.log(rows);
+            });
+});
+
 router.post('/new', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {

@@ -24,6 +24,10 @@ router.get('/', function(req, res, next){
   res.redirect('/web/main');
 });
 
+router.get('/agreement', function(req, res, next){
+    res.render('agreement', {session: req.session});
+});
+
 router.get('/company', function(req, res, next){
     res.render('company', {session: req.session});
 });

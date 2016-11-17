@@ -24,7 +24,7 @@ connection.connect(function(err) {
 });
 
 router.get('/recent', function(req, res) {
-    var query = connection.query('SELECT * FROM `Bidinfo_notice` WHERE (select MAX(date) FROM `Bidinfo_notice`)=date', [], function(err,rows){
+    var query = connection.query('SELECT * FROM `Bidinfo_notice` WHERE (select MAX(date) FROM `Bidinfo_notice` where Title<>\'#popup\')=date', [], function(err,rows){
         res.json(rows);
         console.log(rows);
     });

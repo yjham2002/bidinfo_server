@@ -41,10 +41,11 @@ router.post('/main', bodyParser.urlencoded({
 }), function(req, res, next){
   var query = connection.query('select * FROM `Bidinfo_user` where `Uid`=\'' + req.body.id 
   + '\' AND `Pwd`=\'' + req.body.pw + '\' ', [], function(err,rows){
-    var userId = rows[0].id;
+    
     if(rows.length == 1){
       req.session.regenerate(function(){
         if(rows[0].Uid == 'admin@lelab.com'){
+          var userId = rows[0].id;
           var retrieve = connection.query('select id, Title, Date, Url from `Bidinfo_bidlist` where id in (select bid from `Bidinfo_like` where mid= ? ) order by Date asc', userId, function(err,rows){
           req.session.logined = true;
           req.session.user_id = req.body.id;
@@ -54,6 +55,7 @@ router.post('/main', bodyParser.urlencoded({
           });
         }
         else{
+          var userId = rows[0].id;
           var retrieve = connection.query('select id, Title, Date, Url from `Bidinfo_bidlist` where id in (select bid from `Bidinfo_like` where mid= ? ) order by Date asc', userId, function(err,rows){
           req.session.logined = true;
           req.session.user_id = req.body.id;

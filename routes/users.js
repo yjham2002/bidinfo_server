@@ -108,7 +108,8 @@ router.post('/new', bodyParser.urlencoded({
         'Phone':req.body.Phone,
         'symbol':req.body.Symbol,
         'Bdate':req.body.Bdate,
-        'hid':req.body.hid
+        'hid':req.body.hid,
+        'ExpDate':'1990-01-01'
     };
     var query = connection.query('insert into `Bidinfo_user` set ?', data, function(err,rows){
                 res.json(rows);

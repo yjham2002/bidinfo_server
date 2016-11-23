@@ -19,6 +19,16 @@ connection.connect(function(err) {
     }
 });
 
+router.get('/reqsss', function(req, res) {
+    var query = connection.query('select `Bidinfo_request`.*, (Select `Bidinfo_user`.Phone '
+    +'from `Bidinfo_user` where `Bidinfo_request`.mid=`Bidinfo_user`.id) '
+    +'AS Phone from `Bidinfo_request` order by Date DESC;', [], function(err,rows){
+        res.json(rows);
+        console.log(rows);
+    });
+    console.log(query);
+});
+
 router.get('/:id', function(req, res) {
     var query = connection.query('select * from Bidinfo_user where `id`=' + req.params.id, [], function(err,rows){
         res.json(rows);
@@ -47,6 +57,22 @@ router.post('/request', bodyParser.urlencoded({
     var query = connection.query('INSERT INTO `Bidinfo_request` set ?', data, function(err,rows){
         res.json(rows);
         console.log(rows);
+    });
+    console.log(query);
+});
+
+router.post('/paid/:id', bodyParser.urlencoded({
+    extended: true
+}), function(req, res) {
+    var data = {
+        'ExpDate':req.body.ExpDate,
+        'mid':req.body.mid
+    };
+    var query = connection.query('DELETE FROM `Bidinfo_request` WHERE id = ' + req.params.id, [], function(err,rows){
+        var query2 = connection.query('UPDATE `Bidinfo_user` WHERE id = ' + req.body.mid + ' SET ExpDate=\'' + req.body.ExpDate + '\'', [], function(err,rows){
+            res.json(rows);
+            console.log(rows);
+        });
     });
     console.log(query);
 });

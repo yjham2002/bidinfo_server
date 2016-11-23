@@ -108,10 +108,10 @@ CREATE TABLE Bidinfo_notice
 CREATE TABLE Bidinfo_request
 (
 	id                   INTEGER NOT NULL AUTO_INCREMENT,
-	Draw                 TEXT NULL,
+	Draw                 TEXT NOT NULL,
 	RDate                DATE NULL,
 	Income               INTEGER NULL,
-	Date                 TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+	Date                 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
 	mid                  INTEGER NOT NULL,
 	PRIMARY KEY ( `id` )
 );

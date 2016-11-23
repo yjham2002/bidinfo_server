@@ -37,6 +37,20 @@ router.post('/login', bodyParser.urlencoded({
     console.log(query);
 });
 
+router.post('/request', bodyParser.urlencoded({
+    extended: true
+}), function(req, res) {
+    var data = {
+        'Draw':req.body.Draw,
+        'mid':req.body.mid
+    };
+    var query = connection.query('INSERT INTO `Bidinfo_request` set ?', data, function(err,rows){
+        res.json(rows);
+        console.log(rows);
+    });
+    console.log(query);
+});
+
 router.post('/red', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {

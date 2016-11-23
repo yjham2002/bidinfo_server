@@ -69,7 +69,7 @@ router.post('/paid/:id', bodyParser.urlencoded({
         'mid':req.body.mid
     };
     var query = connection.query('DELETE FROM `Bidinfo_request` WHERE id = ' + req.params.id, [], function(err,rows){
-        var query2 = connection.query('UPDATE `Bidinfo_user` WHERE id = ' + req.body.mid + ' SET ExpDate=\'' + req.body.ExpDate + '\'', [], function(err,rows){
+        var query2 = connection.query('UPDATE `Bidinfo_user` SET ExpDate=\'' + req.body.ExpDate + '\' WHERE id = ' + req.body.mid, [], function(err,rows){
             res.json(rows);
             console.log(rows);
         });

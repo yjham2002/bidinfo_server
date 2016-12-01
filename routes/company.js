@@ -31,7 +31,13 @@ router.post('/search', bodyParser.urlencoded({
     extended: true
 }), function(req, res) {
     var str = req.body.search;
-    var query = connection.query('SELECT * from Bidinfo_company where Name regexp(\'' + str + '\') OR ' + 'Rprt regexp(\'' + str + '\') OR ' + 'hid regexp(\'' + str + '\')', [], function(err,rows){
+    var token = str.trim().split('|');
+    var finalQuery = 'SELECT * from Bidinfo_company where';
+    for(var i = 0; i < token.length; i++){
+        finalQuery += ' (Name like \'%' + token[i] + '%\' OR hid like \'%' + token[i] + '%\')';
+        if(i != token.length - 1) finalQuery += ' AND';
+    }
+    var query = connection.query(finalQuery, [], function(err,rows){
         res.json(rows);
         console.log(rows);
     });

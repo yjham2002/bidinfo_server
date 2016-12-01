@@ -98,7 +98,7 @@ router.post('/new', bodyParser.urlencoded({
 
 router.get('/select', function(req, res) {
     var query = connection.query('select * from `Bidinfo_company` '
-    +'where `Bidinfo_company`.`hid` regexp(select `Bidinfo_bidlist`.`hid` from `Bidinfo_bidlist` where `Bidinfo_bidlist`.`id` = '+ req.query.id +') order by `Name` asc', [], function(err,rows){
+    +'where `Bidinfo_company`.`hid` regexp(select `Bidinfo_bidlist`.`hid` from `Bidinfo_bidlist` where `Bidinfo_bidlist`.`id` = '+ req.query.id +') order by RAND() LIMIT 5', [], function(err,rows){
         res.json(rows);
         console.log(rows);
     });
